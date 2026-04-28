@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant Menu</title>
+</head>
+<body>
+
+<h1>My Restaurant Menu</h1>
+
+<div id="menu"></div>
+
+<script>
+async function loadMenu() {
+  const res = await fetch("https://YOUR_SUPABASE_URL/rest/v1/menus", {
+    headers: {
+      "apikey": "YOUR_ANON_KEY"
+    }
+  })
+
+  const data = await res.json()
+
+  const menuDiv = document.getElementById("menu")
+
+  data.forEach(item => {
+    const el = document.createElement("div")
+    el.innerText = item.name + " - ₹" + item.price
+    menuDiv.appendChild(el)
+  })
+}
+
+loadMenu()
+</script>
+
+</body>
+</html>
